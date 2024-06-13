@@ -15,9 +15,6 @@ var longestPalindrome = function (s) {
         maxLength = currentLength;
         startIndex = left;
       }
-
-      console.log(left, right);
-
       left--;
       right++;
     }
