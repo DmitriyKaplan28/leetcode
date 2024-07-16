@@ -11,6 +11,3 @@ var areOccurrencesEqual = function(s) {
     const set = new Set(Object.values(count))
     return set.size === 1
 };
-
-
-console.log(areOccurrencesEqual("aaabb"))
