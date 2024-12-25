@@ -10,7 +10,7 @@ var removeDigit = function (number, digit) {
     if (number[i] === digit) {
       const newNumber = number.slice(0, i) + number.slice(i + 1);
 
-      if (maxResult === "" || BigInt(newNumber) > BigInt(maxResult)) {
+      if (newNumber > maxResult) {
         maxResult = newNumber;
       }
     }
