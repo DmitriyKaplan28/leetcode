@@ -2,38 +2,26 @@
  * @param {number[]} nums
  * @return {number}
  */
-var findMaximumXOR = function(nums) {
-    const root = {};
-    let max = 0;
+var findMaximumXOR = function (nums) {
+  let max = 0;
+  let mask = 0;
+
+  for (let bit = 30; bit >= 0; bit--) {
+    mask |= 1 << bit;
+    const prefixes = new Set();
 
     for (const num of nums) {
-        let node = root;
-
-        for (let bit = 31; bit >= 0; bit--) {
-            const b = (num >>> bit) & 1;
-            if (!node[b]) node[b] = {};
-            node = node[b];
-        }
+      prefixes.add(num & mask);
     }
 
-    for (const num of nums) {
-        let node = root;
-        let xor = 0;
-
-        for (let bit = 31; bit >= 0; bit--) {
-            const b = (num >>> bit) & 1;
-            const opposite = b ^ 1;
-
-            if (node[opposite]) {
-                xor |= (1 << bit);
-                node = node[opposite];
-            } else {
-                node = node[b];
-            }
-        }
-
-        max = Math.max(max, xor >>> 0);
+    const candidate = max | (1 << bit);
+    for (const prefix of prefixes) {
+      if (prefixes.has(prefix ^ candidate)) {
+        max = candidate;
+        break;
+      }
     }
+  }
 
-    return max;
+  return max >>> 0;
 };
