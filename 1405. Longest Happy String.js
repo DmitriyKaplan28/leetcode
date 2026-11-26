@@ -32,16 +32,6 @@ var longestDiverseString = function (a, b, c) {
 
     result.push(selected.char);
     selected.remaining -= 1;
-
-    if (
-      selected.remaining > 0 &&
-      (result.length < 2 ||
-        result[result.length - 1] !== selected.char ||
-        result[result.length - 2] !== selected.char)
-    ) {
-      result.push(selected.char);
-      selected.remaining -= 1;
-    }
   }
 
   return result.join("");
